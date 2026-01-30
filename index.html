@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXPENSE.io - Expense Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="page active">
+        <div class="login-container">
+            <div class="background-orbs">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-2"></div>
+                <div class="orb orb-3"></div>
+            </div>
+            
+            <div class="login-content">
+                <div class="logo-container">
+                    <div class="logo-icon">⇄</div>
+                    <h1 class="logo-text">EXPENSE<span class="logo-highlight">.io</span></h1>
+                </div>
+
+                <div class="auth-form">
+                    <div id="loginForm">
+                        <div class="form-group">
+                            <label>Email or Username</label>
+                            <input type="text" id="loginUsername" placeholder="Enter email or username">
+                        </div>
+                        <div class="form-group">
+                            <label>Enter password</label>
+                            <input type="password" id="loginPassword" placeholder="••••••••••••••••••••">
+                        </div>
+                        <button class="btn-primary" onclick="handleLogin()">Start</button>
+                        <p class="auth-switch">
+                            Don't have an account? <a onclick="toggleAuthForm()">Sign Up</a>
+                        </p>
+                    </div>
+
+                    <div id="signupForm" style="display: none;">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="signupName" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="signupEmail" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label>Enter password</label>
+                            <input type="password" id="signupPassword" placeholder="••••••••••••••••••••">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" id="signupConfirm" placeholder="••••••••••••••••••••">
+                        </div>
+                        <button class="btn-primary" onclick="handleSignup()">Sign Up</button>
+                        <p class="auth-switch">
+                            Already have an account? <a onclick="toggleAuthForm()">Login</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Onboarding Page -->
+    <div id="onboardingPage" class="page">
+        <div class="onboarding-container">
+            <div class="background-orbs">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-2"></div>
+                <div class="orb orb-3"></div>
+            </div>
+            
+            <div class="onboarding-content">
+                <div class="logo-container">
+                    <div class="logo-icon">⇄</div>
+                    <h1 class="logo-text">EXP<span class="logo-highlight">ensio</span></h1>
+                    <p style="color: #9ca3af; margin-top: 16px;">Let's set up your profile</p>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 25%;"></div>
+                </div>
+
+                <div class="auth-form">
+                    <!-- Step 1: Personal Info -->
+                    <div id="step1" class="step-content active">
+                        <h2 style="margin-bottom: 24px;">Personal Information</h2>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" id="onboardPhone" placeholder="+1 (555) 000-0000">
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Birth</label>
+                            <input type="date" id="onboardDOB">
+                        </div>
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select id="onboardGender">
+                                <option value="">Select Gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                                <option>Prefer not to say</option>
+                            </select>
+                        </div>
+                        <button class="btn-primary" onclick="nextStep(2)">Next</button>
+                    </div>
+
+                    <!-- Step 2: Professional Info -->
+                    <div id="step2" class="step-content">
+                        <h2 style="margin-bottom: 24px;">Professional Details</h2>
+                        <div class="form-group">
+                            <label>Company Name</label>
+                            <input type="text" id="onboardCompany" placeholder="Enter your company name">
+                        </div>
+                        <div class="form-group">
+                            <label>Department</label>
+                            <select id="onboardDepartment">
+                                <option value="">Select Department</option>
+                                <option>Marketing</option>
+                                <option>Sales</option>
+                                <option>Operations</option>
+                                <option>Finance</option>
+                                <option>HR</option>
+                                <option>IT</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Job Title</label>
+                            <input type="text" id="onboardJobTitle" placeholder="e.g., Marketing Manager">
+                        </div>
+                        <div class="form-group">
+                            <label>Employee ID (Optional)</label>
+                            <input type="text" id="onboardEmployeeID" placeholder="Enter employee ID">
+                        </div>
+                        <div style="display: flex; gap: 12px;">
+                            <button class="btn-secondary" onclick="prevStep(1)" style="flex: 1;">Back</button>
+                            <button class="btn-primary" onclick="nextStep(3)" style="flex: 1;">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Address -->
+                    <div id="step3" class="step-content">
+                        <h2 style="margin-bottom: 24px;">Address Information</h2>
+                        <div class="form-group">
+                            <label>Street Address</label>
+                            <input type="text" id="onboardAddress" placeholder="123 Main Street">
+                        </div>
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" id="onboardCity" placeholder="City">
+                        </div>
+                        <div class="form-group">
+                            <label>State/Province</label>
+                            <input type="text" id="onboardState" placeholder="State">
+                        </div>
+                        <div class="form-group">
+                            <label>Postal Code</label>
+                            <input type="text" id="onboardPostal" placeholder="12345">
+                        </div>
+                        <div class="form-group">
+                            <label>Country</label>
+                            <input type="text" id="onboardCountry" placeholder="Country">
+                        </div>
+                        <div style="display: flex; gap: 12px;">
+                            <button class="btn-secondary" onclick="prevStep(2)" style="flex: 1;">Back</button>
+                            <button class="btn-primary" onclick="nextStep(4)" style="flex: 1;">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Preferences -->
+                    <div id="step4" class="step-content">
+                        <h2 style="margin-bottom: 24px;">Preferences</h2>
+                        <div class="form-group">
+                            <label>Default Currency</label>
+                            <select id="onboardCurrency">
+                                <option>EUR (€)</option>
+                                <option>USD ($)</option>
+                                <option>GBP (£)</option>
+                                <option>JPY (¥)</option>
+                                <option>INR (₹)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Expense Approval Threshold (€)</label>
+                            <input type="number" id="onboardThreshold" placeholder="500" value="500">
+                        </div>
+                        <div style="margin-bottom: 24px;">
+                            <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
+                                <input type="checkbox" id="onboardEmailNotif" checked style="width: 20px; height: 20px; cursor: pointer;">
+                                <span>Enable email notifications</span>
+                            </label>
+                        </div>
+                        <div style="display: flex; gap: 12px;">
+                            <button class="btn-secondary" onclick="prevStep(3)" style="flex: 1;">Back</button>
+                            <button class="btn-primary" onclick="completeOnboarding()" style="flex: 1;">Complete Setup</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboardPage" class="page">
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-info">
+                        <h3 id="userName">User</h3>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-item active" onclick="navigateTo('home')">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </div>
+                <div class="nav-item" onclick="navigateTo('expenses')">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Expenses</span>
+                </div>
+                <div class="nav-item" onclick="navigateTo('trips')">
+                    <i class="fas fa-plane"></i>
+                    <span>Trips</span>
+                </div>
+                <div class="nav-item" onclick="navigateTo('approvals')">
+                    <i class="fas fa-check-square"></i>
+                    <span>Approvals</span>
+                </div>
+                <div class="nav-item" onclick="navigateTo('settings')">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </div>
+                <div class="nav-item" onclick="navigateTo('support')">
+                    <i class="fas fa-phone"></i>
+                    <span>Support</span>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="nav-item" onclick="navigateTo('profile')">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </div>
+                <div class="logo-footer">
+                    <div class="logo-icon-small">⇄</div>
+                    <h3>EXPens<span class="logo-highlight">io</span></h3>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <button class="btn-toggle" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <div id="homeContent" class="content-page active"></div>
+            <div id="expensesContent" class="content-page"></div>
+            <div id="tripsContent" class="content-page"></div>
+            <div id="approvalsContent" class="content-page"></div>
+            <div id="settingsContent" class="content-page"></div>
+            <div id="supportContent" class="content-page"></div>
+            <div id="profileContent" class="content-page"></div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="expenseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Expense</h2>
+                <button class="modal-close" onclick="closeModal('expenseModal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label>Subject</label>
+                <input type="text" id="expenseSubject" placeholder="e.g., Office Supplies">
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <select id="expenseCategory">
+                    <option>Supplies</option>
+                    <option>Meals</option>
+                    <option>Travel</option>
+                    <option>Technology</option>
+                    <option>Marketing</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Amount (€)</label>
+                <input type="number" id="expenseAmount" placeholder="0.00" step="0.01">
+            </div>
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" id="expenseDate">
+            </div>
+            <button class="btn-primary" onclick="addExpense()">Add Expense</button>
+        </div>
+    </div>
+
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Plan New Trip</h2>
+                <button class="modal-close" onclick="closeModal('tripModal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label>Destination</label>
+                <input type="text" id="tripDestination" placeholder="e.g., London, UK">
+            </div>
+            <div class="form-group">
+                <label>Purpose</label>
+                <input type="text" id="tripPurpose" placeholder="e.g., Business Conference">
+            </div>
+            <div class="form-group">
+                <label>Start Date</label>
+                <input type="date" id="tripStartDate">
+            </div>
+            <div class="form-group">
+                <label>End Date</label>
+                <input type="date" id="tripEndDate">
+            </div>
+            <div class="form-group">
+                <label>Budget (€)</label>
+                <input type="number" id="tripBudget" placeholder="0.00" step="0.01">
+            </div>
+            <button class="btn-primary" onclick="addTrip()">Plan Trip</button>
+        </div>
+    </div>
+
+    <div id="approvalModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Approval Request</h2>
+                <button class="modal-close" onclick="closeModal('approvalModal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label>Expense Name</label>
+                <input type="text" id="approvalName" placeholder="e.g., Team Lunch">
+            </div>
+            <div class="form-group">
+                <label>Employee Name</label>
+                <input type="text" id="approvalEmployee" placeholder="e.g., John Doe">
+            </div>
+            <div class="form-group">
+                <label>Amount (€)</label>
+                <input type="number" id="approvalAmount" placeholder="0.00" step="0.01">
+            </div>
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" id="approvalDate">
+            </div>
+            <button class="btn-primary" onclick="addApproval()">Submit for Approval</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="pages/home.js"></script>
+    <script src="pages/expense.js"></script>
+    <script src="pages/trips.js"></script>
+    <script src="pages/approval.js"></script>
+    <script src="pages/setting.js"></script>
+    <script src="pages/support.js"></script>
+    <script src="pages/profile.js"></script>
+</body>
+</html>
