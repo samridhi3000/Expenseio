@@ -43,11 +43,9 @@ The project focuses on building strong **front-end development skills**, includi
 
 ## 📊 System Flowchart / Working Diagram
 
-```
 ![Expenseio System Flow]![expenseio-flowchart](https://github.com/user-attachments/assets/874d9f19-bcfd-4449-8848-86f63551d3e7)
 
-
-```
+---
 
 This diagram visually represents the complete workflow from opening the application to managing expenses.
 
